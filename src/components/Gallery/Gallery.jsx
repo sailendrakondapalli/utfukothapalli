@@ -24,6 +24,26 @@ export default function Gallery() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
   const [lightbox, setLightbox] = useState(null);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
+
+  const openLightbox = (item, i) => {
+    setLightbox(item);
+    setLightboxIndex(i);
+  };
+
+  const lightboxPrev = (e) => {
+    e.stopPropagation();
+    const i = (lightboxIndex - 1 + galleryItems.length) % galleryItems.length;
+    setLightbox(galleryItems[i]);
+    setLightboxIndex(i);
+  };
+
+  const lightboxNext = (e) => {
+    e.stopPropagation();
+    const i = (lightboxIndex + 1) % galleryItems.length;
+    setLightbox(galleryItems[i]);
+    setLightboxIndex(i);
+  };
 
   return (
     <section id="gallery" className={styles.section} ref={ref}>
@@ -38,7 +58,7 @@ export default function Gallery() {
           <p>{t('gallery.subtitle')}</p>
         </motion.div>
 
-        {/* Masonry Grid */}
+        {/* ── Desktop: Masonry Grid ── */}
         <div className={styles.masonry}>
           {galleryItems.map((item, i) => (
             <motion.div
@@ -47,7 +67,7 @@ export default function Gallery() {
               initial={{ opacity: 0, scale: 0.85 }}
               animate={inView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.4, delay: i * 0.06 }}
-              onClick={() => setLightbox(item)}
+              onClick={() => openLightbox(item, i)}
             >
               <img src={item.src} alt={`Gallery ${item.id}`} className={styles.galleryImg} />
               <div className={styles.imgOverlay}>
@@ -61,9 +81,31 @@ export default function Gallery() {
             </motion.div>
           ))}
         </div>
+
+        {/* ── Mobile: Horizontal scroll strip ── */}
+        <div className={styles.mobileScroll}>
+          {galleryItems.map((item, i) => (
+            <div
+              key={item.id}
+              className={styles.mobileCard}
+              onClick={() => openLightbox(item, i)}
+            >
+              <img src={item.src} alt={`Gallery ${item.id}`} className={styles.mobileImg} />
+              <div className={styles.mobileOverlay}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" width="22" height="22">
+                  <circle cx="11" cy="11" r="8"/>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                  <line x1="11" y1="8" x2="11" y2="14"/>
+                  <line x1="8" y1="11" x2="14" y2="11"/>
+                </svg>
+              </div>
+            </div>
+          ))}
+        </div>
+
       </div>
 
-      {/* Lightbox */}
+      {/* Lightbox with prev/next */}
       <AnimatePresence>
         {lightbox && (
           <motion.div
@@ -74,16 +116,20 @@ export default function Gallery() {
             onClick={() => setLightbox(null)}
           >
             <motion.img
+              key={lightbox.src}
               src={lightbox.src}
               alt=""
               className={styles.lightboxImg}
-              initial={{ scale: 0.7 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.7 }}
-              transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+              initial={{ scale: 0.85, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.85, opacity: 0 }}
+              transition={{ duration: 0.25 }}
               onClick={(e) => e.stopPropagation()}
             />
             <button className={styles.closeBtn} onClick={() => setLightbox(null)}>✕</button>
+            <button className={`${styles.lbArrow} ${styles.lbLeft}`} onClick={lightboxPrev}>‹</button>
+            <button className={`${styles.lbArrow} ${styles.lbRight}`} onClick={lightboxNext}>›</button>
+            <div className={styles.lbCounter}>{lightboxIndex + 1} / {galleryItems.length}</div>
           </motion.div>
         )}
       </AnimatePresence>
