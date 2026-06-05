@@ -19,6 +19,89 @@ const galleryItems = [
   { id: 12, src: '/images/galery12.jpeg', h: 'short' },
 ];
 
+function ZoomableImage({ src, alt }) {
+  const [scale, setScale] = useState(1);
+  const [translate, setTranslate] = useState({ x: 0, y: 0 });
+  const lastDist = useRef(null);
+  const lastTouch = useRef(null);
+  const imgRef = useRef(null);
+
+  // ── Pinch to zoom ──
+  const onTouchStart = (e) => {
+    if (e.touches.length === 2) {
+      const dx = e.touches[0].clientX - e.touches[1].clientX;
+      const dy = e.touches[0].clientY - e.touches[1].clientY;
+      lastDist.current = Math.hypot(dx, dy);
+    } else if (e.touches.length === 1 && scale > 1) {
+      lastTouch.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    }
+  };
+
+  const onTouchMove = (e) => {
+    if (e.touches.length === 2) {
+      e.preventDefault();
+      const dx = e.touches[0].clientX - e.touches[1].clientX;
+      const dy = e.touches[0].clientY - e.touches[1].clientY;
+      const dist = Math.hypot(dx, dy);
+      if (lastDist.current) {
+        const delta = dist / lastDist.current;
+        setScale(prev => Math.min(Math.max(prev * delta, 1), 4));
+      }
+      lastDist.current = dist;
+    } else if (e.touches.length === 1 && scale > 1 && lastTouch.current) {
+      e.preventDefault();
+      const dx = e.touches[0].clientX - lastTouch.current.x;
+      const dy = e.touches[0].clientY - lastTouch.current.y;
+      setTranslate(prev => ({ x: prev.x + dx, y: prev.y + dy }));
+      lastTouch.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    }
+  };
+
+  const onTouchEnd = (e) => {
+    if (e.touches.length < 2) lastDist.current = null;
+    if (e.touches.length < 1) lastTouch.current = null;
+    // snap back if scale is near 1
+    if (scale < 1.05) {
+      setScale(1);
+      setTranslate({ x: 0, y: 0 });
+    }
+  };
+
+  // Double-tap to reset
+  const lastTap = useRef(0);
+  const onDoubleTap = () => {
+    const now = Date.now();
+    if (now - lastTap.current < 300) {
+      if (scale > 1) {
+        setScale(1);
+        setTranslate({ x: 0, y: 0 });
+      } else {
+        setScale(2.5);
+      }
+    }
+    lastTap.current = now;
+  };
+
+  return (
+    <img
+      ref={imgRef}
+      src={src}
+      alt={alt}
+      className={styles.lightboxImg}
+      style={{
+        transform: `scale(${scale}) translate(${translate.x / scale}px, ${translate.y / scale}px)`,
+        transition: scale === 1 ? 'transform 0.3s ease' : 'none',
+        cursor: scale > 1 ? 'grab' : 'zoom-in',
+        touchAction: 'none',
+      }}
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
+      onTouchEnd={onTouchEnd}
+      onClick={onDoubleTap}
+    />
+  );
+}
+
 export default function Gallery() {
   const { t } = useTranslation();
   const ref = useRef(null);
@@ -115,21 +198,21 @@ export default function Gallery() {
             exit={{ opacity: 0 }}
             onClick={() => setLightbox(null)}
           >
-            <motion.img
-              key={lightbox.src}
-              src={lightbox.src}
-              alt=""
-              className={styles.lightboxImg}
-              initial={{ scale: 0.85, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.85, opacity: 0 }}
-              transition={{ duration: 0.25 }}
-              onClick={(e) => e.stopPropagation()}
-            />
+          <motion.div
+            className={styles.lightboxImgWrap}
+            initial={{ scale: 0.85, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.85, opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <ZoomableImage key={lightbox.src} src={lightbox.src} alt="" />
+          </motion.div>
             <button className={styles.closeBtn} onClick={() => setLightbox(null)}>✕</button>
             <button className={`${styles.lbArrow} ${styles.lbLeft}`} onClick={lightboxPrev}>‹</button>
             <button className={`${styles.lbArrow} ${styles.lbRight}`} onClick={lightboxNext}>›</button>
             <div className={styles.lbCounter}>{lightboxIndex + 1} / {galleryItems.length}</div>
+            <div className={styles.zoomHint}>Pinch to zoom · Double-tap to reset</div>
           </motion.div>
         )}
       </AnimatePresence>
