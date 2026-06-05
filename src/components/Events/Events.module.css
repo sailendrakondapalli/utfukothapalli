@@ -1,0 +1,141 @@
+.section {
+  background: white;
+}
+
+.timeline {
+  position: relative;
+  padding: 20px 0;
+}
+
+.line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  background: linear-gradient(to bottom, #cc0000, #ff4444);
+  border-radius: 2px;
+}
+
+.timelineItem {
+  position: relative;
+  width: 46%;
+  margin-bottom: 48px;
+}
+
+.timelineItem.left {
+  margin-left: 0;
+  margin-right: auto;
+  padding-right: 40px;
+}
+
+.timelineItem.right {
+  margin-left: auto;
+  margin-right: 0;
+  padding-left: 40px;
+}
+
+/* Dot */
+.dot {
+  position: absolute;
+  top: 24px;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #cc0000 0%, #ff2200 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 0.85rem;
+  box-shadow: 0 0 0 4px rgba(204, 0, 0, 0.15);
+  z-index: 2;
+}
+
+.timelineItem.left .dot {
+  right: -60px;
+}
+
+.timelineItem.right .dot {
+  left: -60px;
+}
+
+.card {
+  background: white;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+
+.imgWrap {
+  position: relative;
+  height: 180px;
+  overflow: hidden;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.card:hover .img {
+  transform: scale(1.05);
+}
+
+.dateBadge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: #cc0000;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 50px;
+}
+
+.content {
+  padding: 20px;
+}
+
+.title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 8px;
+}
+
+.desc {
+  font-size: 0.875rem;
+  color: var(--gray);
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .line {
+    left: 20px;
+  }
+
+  .timelineItem {
+    width: 100%;
+    padding-left: 60px !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+  }
+
+  .timelineItem.left .dot,
+  .timelineItem.right .dot {
+    left: 0;
+    right: auto;
+  }
+}

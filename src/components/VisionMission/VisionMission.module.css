@@ -1,0 +1,135 @@
+.section {
+  background: var(--dark);
+  padding: 100px 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+/* Vision Card */
+.visionCard {
+  position: relative;
+  background: var(--gradient);
+  border-radius: var(--radius-lg);
+  padding: 48px 40px;
+  overflow: hidden;
+  color: white;
+}
+
+.cardGlow {
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 200px;
+  height: 200px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 50%;
+}
+
+.iconWrap {
+  margin-bottom: 20px;
+}
+
+.bigIcon {
+  font-size: 3rem;
+}
+
+.cardTitle {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.visionText {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.9);
+  font-style: italic;
+  font-weight: 500;
+}
+
+.visionDecor {
+  display: flex;
+  gap: 8px;
+  margin-top: 32px;
+}
+
+.visionDecor div {
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255,255,255,0.4);
+}
+
+.visionDecor div:first-child {
+  width: 40px;
+  background: rgba(255,255,255,0.9);
+}
+.visionDecor div:nth-child(2) {
+  width: 24px;
+}
+.visionDecor div:last-child {
+  width: 12px;
+}
+
+/* Mission Card */
+.missionCard {
+  background: var(--dark2);
+  border-radius: var(--radius-lg);
+  padding: 48px 40px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.cardTitleDark {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 28px;
+}
+
+.missionList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.missionItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 16px;
+  background: rgba(255,255,255,0.04);
+  border-radius: var(--radius);
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: var(--transition);
+}
+
+.missionItem:hover {
+  background: rgba(26, 86, 219, 0.15);
+  border-color: rgba(26, 86, 219, 0.3);
+  transform: translateX(4px);
+}
+
+.missionIcon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.missionItem span:last-child {
+  color: rgba(255,255,255,0.85);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .visionCard,
+  .missionCard {
+    padding: 36px 28px;
+  }
+}

@@ -1,0 +1,167 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "gallery": "Gallery",
+    "meetings": "Meetings",
+    "vision": "Vision & Mission",
+    "leadership": "Leadership",
+    "contact": "Contact"
+  },
+  "lang": {
+    "en": "English",
+    "te": "తెలుగు"
+  },
+  "hero": {
+    "slides": [
+      {
+        "title": "United Teachers Federation",
+        "subtitle": "Empowering Teachers, Strengthening Education"
+      },
+      {
+        "title": "Working for Teachers' Rights",
+        "subtitle": "Together We Build Better Education"
+      },
+      {
+        "title": "Serving Students and Society",
+        "subtitle": "Education for a Better Future"
+      },
+      {
+        "title": "UTF U. Kothapalli",
+        "subtitle": "Unity, Strength & Progress in Education"
+      },
+      {
+        "title": "Community Service Activity",
+        "subtitle": "Building a Better Society Through Education"
+      }
+    ]
+  },
+  "about": {
+    "title": "About UTF U. Kothapalli",
+    "description": "United Teachers Federation (UTF) is one of the prominent teacher organizations working for the welfare of teachers and the improvement of education standards. UTF U. Kothapalli actively participates in educational reforms, teacher development programs, student welfare initiatives, and community awareness activities. The organization strives to protect teachers' rights while contributing to quality education and social development.",
+    "history": {
+      "title": "Organization History",
+      "text": "UTF U. Kothapalli was established with a vision to unite teachers across the region and advocate for their rights. Over 50 years of dedicated service, it has grown into a powerful voice for educators, conducting numerous programs and events that have positively impacted thousands of teachers and students alike."
+    },
+    "objectives": {
+      "title": "Objectives",
+      "items": [
+        "Protect and promote teachers' rights and welfare",
+        "Improve educational quality and standards",
+        "Conduct teacher training and development programs",
+        "Support student welfare initiatives",
+        "Promote community awareness and social responsibility"
+      ]
+    },
+    "achievements": {
+      "title": "Achievements",
+      "items": [
+        "Successfully conducted 100+ educational programs",
+        "Represented 500+ teachers across the district",
+        "Organized 50+ community welfare activities",
+        "Awarded Best Teacher Organization in the region",
+        "Established strong network with government education departments"
+      ]
+    }
+  },
+  "vision": {
+    "sectionTitle": "Vision & Mission",
+    "visionTitle": "Our Vision",
+    "visionText": "To create an equitable, quality-driven educational environment where teachers are empowered and students thrive.",
+    "missionTitle": "Our Mission",
+    "missionItems": [
+      "Protect teachers' rights and ensure fair treatment",
+      "Improve educational standards across the region",
+      "Conduct regular training and development programs",
+      "Support students with welfare initiatives",
+      "Promote social responsibility and community awareness"
+    ]
+  },
+  "leadership": {
+    "title": "Our Leadership",
+    "subtitle": "Meet the dedicated team leading UTF U. Kothapalli",
+    "members": [
+      {
+        "name": "Sri. Ramaiah K.",
+        "designation": "President",
+        "description": "Leading UTF U. Kothapalli with dedication and commitment to teachers' welfare for over 10 years."
+      },
+      {
+        "name": "Sri. Venkata Rao M.",
+        "designation": "Secretary",
+        "description": "Coordinating all organizational activities and ensuring smooth functioning of UTF programs."
+      },
+      {
+        "name": "Smt. Lakshmi D.",
+        "designation": "Treasurer",
+        "description": "Managing financial affairs with transparency and accountability for the federation's growth."
+      },
+      {
+        "name": "Sri. Suresh P.",
+        "designation": "District Representative",
+        "description": "Representing teachers' interests at the district level and liaising with government bodies."
+      }
+    ]
+  },
+  "meetings": {
+    "title": "Meetings & Events",
+    "subtitle": "Stay updated with our latest activities and programs",
+    "events": [
+      {
+        "date": "January 15, 2026",
+        "title": "New Council Meeting Tuni",
+        "description": "New council meeting held at Tuni to discuss teachers' issues, policy updates, and upcoming federation events."
+      },
+      {
+        "date": "February 20, 2026",
+        "title": "Ranaberi 2.0",
+        "description": "Ranaberi 2.0 — a major educational awareness program highlighting the importance of quality education and teachers' unity."
+      },
+      {
+        "date": "March 10, 2026",
+        "title": "Ranaberi 1.0",
+        "description": "Ranaberi 1.0 — the landmark program that started the movement for teachers' rights and quality education across the region."
+      }
+    ]
+  },
+  "gallery": {
+    "title": "Photo Gallery",
+    "subtitle": "Glimpses of our activities and events",
+    "categories": {
+      "all": "All",
+      "meetings": "Meetings",
+      "events": "Events",
+      "welfare": "Welfare Activities",
+      "training": "Training Programs"
+    }
+  },
+  "stats": {
+    "title": "Our Impact",
+    "subtitle": "Numbers that speak for themselves",
+    "teachers": "Teachers",
+    "programs": "Programs Conducted",
+    "meetings": "Meetings",
+    "years": "Years of Service"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Get in touch with UTF U. Kothapalli",
+    "address": "UTF U. Kothapalli Office, Kothapalli Village, Andhra Pradesh, India",
+    "phone": "+91 98765 43210",
+    "email": "utfkothapalli@gmail.com",
+    "form": {
+      "name": "Your Name",
+      "phone": "Phone Number",
+      "email": "Email Address",
+      "message": "Your Message",
+      "submit": "Send Message",
+      "success": "Message sent successfully!"
+    }
+  },
+  "footer": {
+    "description": "United Teachers Federation U. Kothapalli — dedicated to empowering teachers and improving education standards.",
+    "quickLinks": "Quick Links",
+    "followUs": "Follow Us",
+    "copyright": "© 2026 UTF U. Kothapalli. All Rights Reserved."
+  }
+}
