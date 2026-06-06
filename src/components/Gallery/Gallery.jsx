@@ -175,12 +175,9 @@ export default function Gallery() {
         {/* Desktop: Masonry */}
         <div className={styles.masonry}>
           {galleryItems.map((item, i) => (
-            <motion.div
+            <div
               key={item.id}
               className={`${styles.masonryItem} ${item.h === 'tall' ? styles.tall : styles.short}`}
-              initial={{ opacity: 0, scale: 0.85 }}
-              animate={inView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.4, delay: (i % 12) * 0.05 }}
               onClick={() => openLightbox(item, i)}
             >
               <img src={item.src} alt={`Gallery ${item.id}`} className={styles.galleryImg} loading="lazy" />
@@ -192,7 +189,7 @@ export default function Gallery() {
                   <line x1="8" y1="11" x2="14" y2="11"/>
                 </svg>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 
