@@ -165,7 +165,7 @@ export default function Gallery() {
         <motion.div
           className="section-header"
           initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
           <h2>{t('gallery.title')}</h2>
