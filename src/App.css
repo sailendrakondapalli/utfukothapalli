@@ -1,13 +1,16 @@
-/* Reset any leftover Vite defaults */
-#root {
-  min-height: 100vh;
-  width: 100%;
-  overflow-x: hidden;
+html, body, #root {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
 }
 
 main {
   width: 100%;
+  max-width: 100%;
   overflow-x: hidden;
   margin: 0;
   padding: 0;
+  display: block;
 }

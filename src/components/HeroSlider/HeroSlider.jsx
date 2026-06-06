@@ -49,7 +49,6 @@ export default function HeroSlider() {
             src={src}
             alt={`Slide ${i + 1}`}
             className={styles.slideImg}
-            style={i === 0 ? { objectFit: 'contain', background: '#000' } : {}}
           />
           <div className={styles.overlay} />
         </div>

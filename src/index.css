@@ -29,8 +29,8 @@
 
 html {
   scroll-behavior: smooth;
-  width: 100%;
   overflow-x: hidden;
+  width: 100%;
 }
 
 body {
@@ -40,14 +40,18 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   width: 100%;
+  max-width: 100%;
   margin: 0 !important;
   padding: 0 !important;
-  max-width: 100%;
+  position: relative;
 }
 
 #root {
   width: 100%;
+  max-width: 100%;
   overflow-x: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 a {
