@@ -17,6 +17,11 @@ const galleryItems = [
   { id: 10, src: '/images/galery10.jpeg', h: 'short' },
   { id: 11, src: '/images/galery11.jpeg', h: 'tall'  },
   { id: 12, src: '/images/galery12.jpeg', h: 'short' },
+  { id: 13, src: '/images/wa1.jpeg',      h: 'tall'  },
+  { id: 14, src: '/images/wa2.jpeg',      h: 'short' },
+  { id: 15, src: '/images/wa3.jpeg',      h: 'tall'  },
+  { id: 16, src: '/images/wa4.jpeg',      h: 'short' },
+  { id: 17, src: '/images/wa5.jpeg',      h: 'short' },
 ];
 
 function ZoomableImage({ src, alt }) {
