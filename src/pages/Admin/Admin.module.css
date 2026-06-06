@@ -1,0 +1,552 @@
+/* ══════════════════════════════
+   LOGIN PAGE
+══════════════════════════════ */
+.loginPage {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #8b0000 0%, #cc0000 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.loginBox {
+  background: white;
+  border-radius: 20px;
+  padding: 48px 40px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+.loginLogo img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: contain;
+  border: 3px solid #cc0000;
+  margin: 0 auto 16px;
+  display: block;
+}
+
+.loginTitle {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #8b0000;
+  margin-bottom: 4px;
+}
+
+.loginSub {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-bottom: 28px;
+}
+
+.loginForm { text-align: left; }
+
+.formGroup { margin-bottom: 18px; }
+
+.formGroup label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #374151;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.formGroup input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  color: #111;
+  transition: border-color 0.2s;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.formGroup input:focus {
+  outline: none;
+  border-color: #cc0000;
+  box-shadow: 0 0 0 3px rgba(204,0,0,0.1);
+}
+
+.errorMsg {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.loginBtn {
+  width: 100%;
+  padding: 13px;
+  background: linear-gradient(135deg, #cc0000 0%, #ff2200 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.loginBtn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(204,0,0,0.4);
+}
+
+.loginBtn:disabled { opacity: 0.7; cursor: not-allowed; }
+
+.backLink {
+  display: inline-block;
+  margin-top: 20px;
+  color: #6b7280;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.backLink:hover { color: #cc0000; }
+
+/* ══════════════════════════════
+   DASHBOARD
+══════════════════════════════ */
+.dashboard {
+  min-height: 100vh;
+  background: #f3f4f6;
+}
+
+.dashHeader {
+  background: linear-gradient(135deg, #8b0000 0%, #cc0000 100%);
+  padding: 16px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+  flex-wrap: wrap;
+  gap: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.dashLogo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.dashLogo img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: contain;
+  background: white;
+  border: 2px solid #ffd700;
+}
+
+.dashLogo h1 {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #ffd700;
+  margin-bottom: 2px;
+}
+
+.dashLogo p {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.7);
+}
+
+.dashActions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.viewSiteBtn {
+  padding: 8px 18px;
+  background: rgba(255,255,255,0.15);
+  color: white;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+.viewSiteBtn:hover { background: rgba(255,255,255,0.25); }
+
+.logoutBtn {
+  padding: 8px 18px;
+  background: rgba(0,0,0,0.25);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-family: inherit;
+}
+
+.logoutBtn:hover { background: rgba(0,0,0,0.4); }
+
+.dashBody {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 28px 24px;
+}
+
+/* Message */
+.msgBox {
+  padding: 12px 18px;
+  background: #f0fdf4;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.msgError {
+  background: #fef2f2;
+  color: #dc2626;
+  border-color: #fecaca;
+}
+
+/* Upload Section */
+.uploadSection {
+  background: white;
+  border-radius: 16px;
+  padding: 28px;
+  margin-bottom: 28px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.uploadSection h2 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #111;
+  margin-bottom: 6px;
+}
+
+.uploadSection p {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-bottom: 18px;
+}
+
+.uploadBox {
+  border: 2px dashed #d1d5db;
+  border-radius: 14px;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.uploadBox:hover { border-color: #cc0000; background: #fff5f5; }
+
+.dragActive {
+  border-color: #cc0000 !important;
+  background: #fff5f5 !important;
+  transform: scale(1.01);
+}
+
+.fileInput { display: none; }
+
+.uploadLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  cursor: pointer;
+  gap: 8px;
+  user-select: none;
+}
+
+.uploadIcon { font-size: 2.8rem; }
+
+.uploadMainText {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #cc0000;
+}
+
+.uploadHint {
+  font-size: 0.78rem;
+  color: #9ca3af;
+}
+
+/* Progress bar */
+.progressBar {
+  width: 260px;
+  height: 6px;
+  background: #f3f4f6;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #cc0000, #ff4444);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+/* Gallery Section */
+.gallerySection {
+  background: white;
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.gallerySectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.gallerySectionHeader h2 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #111;
+  margin: 0;
+}
+
+.photoCount {
+  background: #cc0000;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 12px;
+  border-radius: 50px;
+}
+
+.refreshBtn {
+  background: #f3f4f6;
+  color: #374151;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-family: inherit;
+  margin-left: auto;
+}
+
+.refreshBtn:hover { background: #e5e7eb; }
+
+.loadingSpinner, .emptyMsg {
+  text-align: center;
+  padding: 60px 20px;
+  color: #6b7280;
+  font-size: 1rem;
+}
+
+.photoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 14px;
+}
+
+.photoCard {
+  background: #f9fafb;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.photoCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+
+.photoImgWrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.photoThumb {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s;
+}
+
+.photoCard:hover .photoThumb {
+  transform: scale(1.04);
+}
+
+.photoOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+.photoCard:hover .photoOverlay {
+  opacity: 1;
+}
+
+.deleteBtnOverlay {
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-family: inherit;
+}
+
+.deleteBtnOverlay:hover:not(:disabled) { background: #b91c1c; }
+
+.deleteBtnOverlay:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.photoInfo {
+  padding: 8px 10px;
+}
+
+.photoName {
+  font-size: 0.72rem;
+  color: #6b7280;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .loginBox { padding: 32px 20px; }
+  .dashHeader { padding: 12px 16px; }
+  .dashBody { padding: 16px 12px; }
+  .photoGrid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+  .uploadLabel { padding: 28px 16px; }
+  .photoOverlay { opacity: 1; background: rgba(0,0,0,0.3); }
+}
+
+/* Extra dashboard styles */
+.msgError {
+  background: #fef2f2;
+  color: #dc2626;
+  border-color: #fecaca;
+}
+
+.dragActive {
+  border-color: #cc0000;
+  background: rgba(204,0,0,0.04);
+}
+
+.uploadMainText {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #cc0000;
+}
+
+.progressBar {
+  width: 100%;
+  height: 6px;
+  background: #e5e7eb;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(135deg, #cc0000, #ff2200);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.gallerySectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.gallerySectionHeader h2 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #111;
+  margin: 0;
+}
+
+.refreshBtn {
+  margin-left: auto;
+  padding: 6px 14px;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: #374151;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.refreshBtn:hover { background: #e5e7eb; }
+
+.photoImgWrap {
+  position: relative;
+  height: 160px;
+  overflow: hidden;
+}
+
+.photoOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.photoCard:hover .photoOverlay { opacity: 1; }
+
+.deleteBtnOverlay {
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-family: inherit;
+}
+
+.deleteBtnOverlay:hover:not(:disabled) { background: #b91c1c; }
+.deleteBtnOverlay:disabled { opacity: 0.6; cursor: not-allowed; }

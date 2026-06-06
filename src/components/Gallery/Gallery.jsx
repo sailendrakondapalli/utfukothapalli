@@ -1,102 +1,28 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'framer-motion';
+import { supabase, BUCKET } from '../../lib/supabase';
 import styles from './Gallery.module.css';
 
-const galleryItems = [
-  { id: 1,  src: '/images/galery1.jpg',   h: 'tall'  },
-  { id: 2,  src: '/images/galery2.jpg',   h: 'short' },
-  { id: 3,  src: '/images/galery3.jpg',   h: 'short' },
-  { id: 4,  src: '/images/galery4.jpeg',  h: 'tall'  },
-  { id: 5,  src: '/images/galery5.jpeg',  h: 'short' },
-  { id: 6,  src: '/images/galery6.jpeg',  h: 'tall'  },
-  { id: 7,  src: '/images/galery7.jpeg',  h: 'short' },
-  { id: 8,  src: '/images/galery8.jpg',   h: 'short' },
-  { id: 9,  src: '/images/galery9.jpeg',  h: 'tall'  },
-  { id: 10, src: '/images/galery10.jpeg', h: 'short' },
-  { id: 11, src: '/images/galery11.jpeg', h: 'tall'  },
-  { id: 12, src: '/images/galery12.jpeg', h: 'short' },
-  { id: 13, src: '/images/wa1.jpeg',  h: 'tall'  },
-  { id: 14, src: '/images/wa2.jpeg',  h: 'short' },
-  { id: 15, src: '/images/wa3.jpeg',  h: 'tall'  },
-  { id: 16, src: '/images/wa4.jpeg',  h: 'short' },
-  { id: 17, src: '/images/wa5.jpeg',  h: 'short' },
-  { id: 18, src: '/images/wa6.jpeg',  h: 'tall'  },
-  { id: 19, src: '/images/wa7.jpeg',  h: 'short' },
-  { id: 20, src: '/images/wa8.jpeg',  h: 'tall'  },
-  { id: 21, src: '/images/wa9.jpeg',  h: 'short' },
-  { id: 22, src: '/images/wa10.jpeg', h: 'short' },
-  { id: 23, src: '/images/wa11.jpeg', h: 'tall'  },
-  { id: 24, src: '/images/wa12.jpeg', h: 'short' },
-  { id: 25, src: '/images/wa13.jpeg', h: 'tall'  },
-  { id: 26, src: '/images/wa14.jpeg', h: 'short' },
-  { id: 27, src: '/images/wa15.jpeg', h: 'short' },
-  { id: 28, src: '/images/wa16.jpeg', h: 'tall'  },
-  { id: 29, src: '/images/wa17.jpeg', h: 'short' },
-  { id: 30, src: '/images/wa18.jpeg', h: 'tall'  },
-  { id: 31, src: '/images/wa19.jpeg', h: 'short' },
-  { id: 32, src: '/images/wa20.jpeg', h: 'short' },
-  { id: 33, src: '/images/wa21.jpeg', h: 'tall'  },
-  { id: 34, src: '/images/wa22.jpeg', h: 'short' },
-  { id: 35, src: '/images/wa23.jpeg', h: 'tall'  },
-  { id: 36, src: '/images/wa24.jpeg', h: 'short' },
-  { id: 37, src: '/images/wa25.jpeg', h: 'short' },
-  { id: 38, src: '/images/wa26.jpeg', h: 'tall'  },
-  { id: 39, src: '/images/wa27.jpeg', h: 'short' },
-  { id: 40, src: '/images/wa28.jpeg', h: 'tall'  },
-  { id: 41, src: '/images/wa29.jpeg', h: 'short' },
-  { id: 42, src: '/images/wa30.jpeg', h: 'short' },
-  { id: 43, src: '/images/wa31.jpeg', h: 'tall'  },
-  { id: 44, src: '/images/wa32.jpeg', h: 'short' },
-  { id: 45, src: '/images/wa33.jpeg', h: 'tall'  },
-  { id: 46, src: '/images/wa34.jpeg', h: 'short' },
-  { id: 47, src: '/images/wa35.jpeg', h: 'short' },
-  { id: 48, src: '/images/wa36.jpeg', h: 'tall'  },
-  { id: 49, src: '/images/wa37.jpeg', h: 'short' },
-  { id: 50, src: '/images/wa38.jpeg', h: 'tall'  },
-  { id: 51, src: '/images/wa39.jpeg', h: 'short' },
-  { id: 52, src: '/images/wa40.jpeg', h: 'short' },
-  { id: 53, src: '/images/wa41.jpeg', h: 'tall'  },
-  { id: 54, src: '/images/wa42.jpeg', h: 'short' },
-  { id: 55, src: '/images/wa43.jpeg', h: 'tall'  },
-  { id: 56, src: '/images/wa44.jpeg', h: 'short' },
-  { id: 57, src: '/images/wa45.jpeg', h: 'short' },
-  { id: 58, src: '/images/wa46.jpeg', h: 'tall'  },
-  { id: 59, src: '/images/wa47.jpeg', h: 'short' },
-  { id: 60, src: '/images/wa48.jpeg', h: 'tall'  },
-  { id: 61, src: '/images/wa49.jpeg', h: 'short' },
-  { id: 62, src: '/images/wa50.jpeg', h: 'short' },
-  { id: 63, src: '/images/wa51.jpeg', h: 'tall'  },
-  { id: 64, src: '/images/wa52.jpeg', h: 'short' },
-  { id: 65, src: '/images/wa53.jpeg', h: 'tall'  },
-  { id: 66, src: '/images/wa54.jpeg', h: 'short' },
-  { id: 67, src: '/images/wa55.jpeg', h: 'short' },
-  { id: 68, src: '/images/wa56.jpeg', h: 'tall'  },
-  { id: 69, src: '/images/wa57.jpeg', h: 'short' },
-  { id: 70, src: '/images/wa58.jpeg', h: 'tall'  },
-  { id: 71, src: '/images/wa59.jpeg', h: 'short' },
-  { id: 72, src: '/images/wa60.jpeg', h: 'short' },
-  { id: 73, src: '/images/wa61.jpeg', h: 'tall'  },
-  { id: 74, src: '/images/wa62.jpeg', h: 'short' },
-  { id: 75, src: '/images/wa63.jpeg', h: 'tall'  },
-  { id: 76, src: '/images/wa64.jpeg', h: 'short' },
-  { id: 77, src: '/images/wa65.jpeg', h: 'short' },
-  { id: 78, src: '/images/wa66.jpeg', h: 'tall'  },
-  { id: 79, src: '/images/wa67.jpeg', h: 'short' },
-  { id: 80, src: '/images/wa68.jpeg', h: 'tall'  },
-  { id: 81, src: '/images/wa69.jpeg', h: 'short' },
-  { id: 82, src: '/images/wa70.jpeg', h: 'short' },
+// Fallback local images if Supabase not configured
+const localFallback = [
+  '/images/galery1.jpg', '/images/galery2.jpg', '/images/galery3.jpg',
+  '/images/galery4.jpeg', '/images/galery5.jpeg', '/images/galery6.jpeg',
+  '/images/galery7.jpeg', '/images/galery8.jpg', '/images/galery9.jpeg',
+  '/images/galery10.jpeg', '/images/galery11.jpeg', '/images/galery12.jpeg',
+  '/images/wa1.jpeg', '/images/wa2.jpeg', '/images/wa3.jpeg',
+  '/images/wa4.jpeg', '/images/wa5.jpeg',
 ];
+
+const heights = ['tall','short','short','tall','short','tall','short','short','tall','short','tall','short'];
 
 function ZoomableImage({ src, alt }) {
   const [scale, setScale] = useState(1);
   const [translate, setTranslate] = useState({ x: 0, y: 0 });
   const lastDist = useRef(null);
   const lastTouch = useRef(null);
-  const imgRef = useRef(null);
 
-  // ── Pinch to zoom ──
   const onTouchStart = (e) => {
     if (e.touches.length === 2) {
       const dx = e.touches[0].clientX - e.touches[1].clientX;
@@ -130,33 +56,22 @@ function ZoomableImage({ src, alt }) {
   const onTouchEnd = (e) => {
     if (e.touches.length < 2) lastDist.current = null;
     if (e.touches.length < 1) lastTouch.current = null;
-    // snap back if scale is near 1
-    if (scale < 1.05) {
-      setScale(1);
-      setTranslate({ x: 0, y: 0 });
-    }
+    if (scale < 1.05) { setScale(1); setTranslate({ x: 0, y: 0 }); }
   };
 
-  // Double-tap to reset
   const lastTap = useRef(0);
   const onDoubleTap = () => {
     const now = Date.now();
     if (now - lastTap.current < 300) {
-      if (scale > 1) {
-        setScale(1);
-        setTranslate({ x: 0, y: 0 });
-      } else {
-        setScale(2.5);
-      }
+      if (scale > 1) { setScale(1); setTranslate({ x: 0, y: 0 }); }
+      else setScale(2.5);
     }
     lastTap.current = now;
   };
 
   return (
     <img
-      ref={imgRef}
-      src={src}
-      alt={alt}
+      src={src} alt={alt}
       className={styles.lightboxImg}
       style={{
         transform: `scale(${scale}) translate(${translate.x / scale}px, ${translate.y / scale}px)`,
@@ -175,28 +90,74 @@ function ZoomableImage({ src, alt }) {
 export default function Gallery() {
   const { t } = useTranslation();
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-80px' });
+  const inView = useInView(ref, { once: true, margin: '0px' });
+  const [galleryItems, setGalleryItems] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [lightbox, setLightbox] = useState(null);
   const [lightboxIndex, setLightboxIndex] = useState(0);
 
-  const openLightbox = (item, i) => {
-    setLightbox(item);
-    setLightboxIndex(i);
-  };
+  // Load from Supabase on mount — no inView dependency
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const { data, error } = await supabase.storage.from(BUCKET).list('', {
+          limit: 1000,
+          sortBy: { column: 'created_at', order: 'desc' },
+        });
+
+        if (error) throw error;
+
+        const filtered = (data || []).filter(f => f.name !== '.emptyFolderPlaceholder');
+
+        if (filtered.length === 0) throw new Error('empty');
+
+        const items = filtered.map((f, i) => {
+          const { data: urlData } = supabase.storage.from(BUCKET).getPublicUrl(f.name);
+          return {
+            id: i + 1,
+            src: urlData.publicUrl,
+            h: heights[i % heights.length],
+          };
+        });
+
+        setGalleryItems(items);
+      } catch (err) {
+        console.warn('Supabase gallery failed, using local fallback:', err.message);
+        setGalleryItems(
+          localFallback.map((src, i) => ({
+            id: i + 1,
+            src,
+            h: heights[i % heights.length],
+          }))
+        );
+      }
+      setLoading(false);
+    };
+
+    load();
+  }, []);
+
+  const openLightbox = (item, i) => { setLightbox(item); setLightboxIndex(i); };
 
   const lightboxPrev = (e) => {
     e.stopPropagation();
     const i = (lightboxIndex - 1 + galleryItems.length) % galleryItems.length;
-    setLightbox(galleryItems[i]);
-    setLightboxIndex(i);
+    setLightbox(galleryItems[i]); setLightboxIndex(i);
   };
 
   const lightboxNext = (e) => {
     e.stopPropagation();
     const i = (lightboxIndex + 1) % galleryItems.length;
-    setLightbox(galleryItems[i]);
-    setLightboxIndex(i);
+    setLightbox(galleryItems[i]); setLightboxIndex(i);
   };
+
+  if (loading) return (
+    <section id="gallery" className={styles.section}>
+      <div className="container">
+        <div className={styles.loadingMsg}>Loading gallery...</div>
+      </div>
+    </section>
+  );
 
   return (
     <section id="gallery" className={styles.section} ref={ref}>
@@ -211,7 +172,7 @@ export default function Gallery() {
           <p>{t('gallery.subtitle')}</p>
         </motion.div>
 
-        {/* ── Desktop: Masonry Grid ── */}
+        {/* Desktop: Masonry */}
         <div className={styles.masonry}>
           {galleryItems.map((item, i) => (
             <motion.div
@@ -219,10 +180,10 @@ export default function Gallery() {
               className={`${styles.masonryItem} ${item.h === 'tall' ? styles.tall : styles.short}`}
               initial={{ opacity: 0, scale: 0.85 }}
               animate={inView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.4, delay: i * 0.06 }}
+              transition={{ duration: 0.4, delay: (i % 12) * 0.05 }}
               onClick={() => openLightbox(item, i)}
             >
-              <img src={item.src} alt={`Gallery ${item.id}`} className={styles.galleryImg} />
+              <img src={item.src} alt={`Gallery ${item.id}`} className={styles.galleryImg} loading="lazy" />
               <div className={styles.imgOverlay}>
                 <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" width="28" height="28">
                   <circle cx="11" cy="11" r="8"/>
@@ -235,15 +196,11 @@ export default function Gallery() {
           ))}
         </div>
 
-        {/* ── Mobile: Horizontal scroll strip ── */}
+        {/* Mobile: Horizontal scroll */}
         <div className={styles.mobileScroll}>
           {galleryItems.map((item, i) => (
-            <div
-              key={item.id}
-              className={styles.mobileCard}
-              onClick={() => openLightbox(item, i)}
-            >
-              <img src={item.src} alt={`Gallery ${item.id}`} className={styles.mobileImg} />
+            <div key={item.id} className={styles.mobileCard} onClick={() => openLightbox(item, i)}>
+              <img src={item.src} alt={`Gallery ${item.id}`} className={styles.mobileImg} loading="lazy" />
               <div className={styles.mobileOverlay}>
                 <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" width="22" height="22">
                   <circle cx="11" cy="11" r="8"/>
@@ -255,29 +212,26 @@ export default function Gallery() {
             </div>
           ))}
         </div>
-
       </div>
 
-      {/* Lightbox with prev/next */}
+      {/* Lightbox */}
       <AnimatePresence>
         {lightbox && (
           <motion.div
             className={styles.lightbox}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             onClick={() => setLightbox(null)}
           >
-          <motion.div
-            className={styles.lightboxImgWrap}
-            initial={{ scale: 0.85, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.85, opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <ZoomableImage key={lightbox.src} src={lightbox.src} alt="" />
-          </motion.div>
+            <motion.div
+              className={styles.lightboxImgWrap}
+              initial={{ scale: 0.85, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.85, opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <ZoomableImage key={lightbox.src} src={lightbox.src} alt="" />
+            </motion.div>
             <button className={styles.closeBtn} onClick={() => setLightbox(null)}>✕</button>
             <button className={`${styles.lbArrow} ${styles.lbLeft}`} onClick={lightboxPrev}>‹</button>
             <button className={`${styles.lbArrow} ${styles.lbRight}`} onClick={lightboxNext}>›</button>

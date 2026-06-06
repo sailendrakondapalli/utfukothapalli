@@ -16,9 +16,11 @@
 
 .topBand {
   background: #cc0000;
-  padding: 12px 0 14px;
+  padding: 10px 0 10px;
   border-bottom: 3px solid #ffd700;
   width: 100%;
+  min-height: 80px;
+  display: block;
 }
 
 .topInner {
@@ -28,6 +30,7 @@
   display: flex;
   align-items: center;
   gap: 20px;
+  min-height: 70px;
 }
 
 /* ── UTF logo image ── */

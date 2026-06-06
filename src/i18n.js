@@ -10,9 +10,12 @@ i18n
       en: { translation: enTranslation },
       te: { translation: teTranslation },
     },
-    lng: 'en',
+    lng: 'te',
     fallbackLng: 'en',
     interpolation: { escapeValue: false },
+    react: {
+      useSuspense: false,
+    },
   });
 
 export default i18n;
